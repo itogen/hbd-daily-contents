@@ -193,8 +193,9 @@ class  Hbd_Daily_Widget extends WP_Widget
         $args = [
             'posts_per_page' => 5,
             'post_type'      => ['daily', 'birthdays'],
-            'orderby'        => 'date',  //日付順
+            'orderby'        => 'meta_value_num',  //日付順
             'order'          => 'DESC', //降順
+            'meta_key'       => 'priority',
             'meta_query'     => [
                 [
                     'key'    => 'month',
