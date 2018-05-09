@@ -198,12 +198,12 @@ class  Hbd_Daily_Widget extends WP_Widget
             'meta_query'     => [
                 [
                     'key'    => 'month',
-                    'value'  => date('n'),
+                    'value'  => $_GET['hbd_month'] ?? date('n'),
                     'type'   => 'numeric',
                 ],
                 [
                     'key'    => 'day',
-                    'value'  => date('j'),
+                    'value'  => $_GET['hbd_day'] ?? date('j'),
                     'type'   => 'numeric',
                 ],
             ],
