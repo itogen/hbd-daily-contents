@@ -32,6 +32,18 @@ License: GPL2
 $HbdDailyWidgetObj = new Hbd_Daily_Widget();
 
 
+// register our CSS and scripts
+wp_register_style( 'hbd-daily-contents',  get_settings('site_url').'/wp-content/plugins/hbd-daily-contents/style.css');
+wp_register_script( 'hbd-daily-contents', get_settings('site_url').'/wp-content/plugins/hbd-daily-contents/script.js', ['jquery']);
+
+// enqueue them!
+wp_enqueue_style("hbd-daily-contents");
+wp_enqueue_script("hbd-daily-contents");
+
+
+// wp_enqueue_style('hbd-daily-contents', get_settings('site_url').'/wp-content/plugins/hbd-daily-contents/style.css');
+// wp_enqueue_script('hbd-daily-contents', get_settings('site_url').'/wp-content/plugins/hbd-daily-contents/script.js');
+
 class  Hbd_Daily_Widget extends WP_Widget
 {
 
@@ -183,9 +195,6 @@ class  Hbd_Daily_Widget extends WP_Widget
             $this->render_contents_list_today();
             echo $this->instance['text'];
             echo $this->args['after_widget'];
-
-            wp_enqueue_style('hbd-daily-contents', get_settings('site_url').'/wp-content/plugins/hbd-daily-contents/style.css');
-            wp_enqueue_script('hbd-daily-contents', get_settings('site_url').'/wp-content/plugins/hbd-daily-contents/script.js');
     }
 
     public function get_contents_list_today()
