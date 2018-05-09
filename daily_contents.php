@@ -220,7 +220,7 @@ class  Hbd_Daily_Widget extends WP_Widget
                 $query->the_post();
                 ?>
                 <div>
-                    <a href="<?php the_permalink(); ?>" title="誕生日：<?php the_title(); ?>の詳細" class="hbd-thumnail-link">
+                    <a href="<?php the_permalink(); ?>" title="<?php the_title(); ?>" class="hbd-thumnail-link">
                         <div class="hbd-thumbnail-caption">Happy Birthday <?php $this->render_hbd_emotiocon(); ?></div>
                         <?php if(has_post_thumbnail()): ?>
                             <?php the_post_thumbnail(['300','300']); ?>
@@ -228,7 +228,7 @@ class  Hbd_Daily_Widget extends WP_Widget
                             <img src="<?php echo get_settings('site_url').'/wp-content/plugins/hbd-daily-contents/hbd_cake.jpg';?>" alt="no image">
                         <?php endif; ?>
                     </a>
-                    <div class="hbd-headline"><?php echo date('n月j日'); ?>は<?php the_title(); ?>さんの誕生日です</div>
+                    <div class="hbd-headline"><?php the_title(); ?></div>
                     <div class="hbd-description"><?php the_content(); ?></div>
                 </div>
 
