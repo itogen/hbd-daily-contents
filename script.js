@@ -10,5 +10,5 @@ jQuery('.hbd-daily-contents').slick({
     slidesToShow: 1,
     autoplay: true,
     autoplaySpeed: 20000,
-    centerPadding: '30px'
+    centerPadding: '20px'
 });

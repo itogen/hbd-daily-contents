@@ -192,7 +192,7 @@ class  Hbd_Daily_Widget extends WP_Widget
     {
         $args = [
             'posts_per_page' => 5,
-            'post_type'      => 'daily',
+            'post_type'      => ['daily', 'birthdays'],
             'orderby'        => 'date',  //日付順
             'order'          => 'DESC', //降順
             'meta_query'     => [
@@ -219,9 +219,12 @@ class  Hbd_Daily_Widget extends WP_Widget
                 $query->the_post();
                 ?>
                 <div>
-                    <?php the_post_thumbnail('large'); ?>
-                    <?php the_content(); ?>
-                    <p><a href="<?php the_permalink(); ?>" title="<?php the_title_attribute(); ?>"><?php the_title(); ?></a></p>
+                    <a href="<?php the_permalink(); ?>" title="誕生日：<?php the_title(); ?>の詳細" class="hbd-thumnail-link">
+                        <div class="hbd-thumbnail-caption">Happy Birthday <?php $this->render_hbd_emotiocon(); ?></div>
+                        <?php the_post_thumbnail(['300','300']); ?>
+                    </a>
+                    <div class="hbd-headline"><?php echo date('n月j日'); ?>は<?php the_title(); ?>さんの誕生日です</div>
+                    <div class="hbd-description"><?php the_content(); ?></div>
                 </div>
 
                 <?php
@@ -231,4 +234,14 @@ class  Hbd_Daily_Widget extends WP_Widget
         echo '</div>';
     }
 
+    function render_hbd_emotiocon(){
+        $arr = [
+            "&#128144;", //花束
+            "&#127873;", //プレゼント
+            "&#127874;", //バースデーケーキ
+            "&#127881;", //クラッカー
+            "&#127882;", //オメデトウ
+        ];
+        echo $arr[array_rand($arr)];
+    }
 }//Hbd_Daily_Widget
