@@ -178,12 +178,14 @@ class  Hbd_Daily_Widget extends WP_Widget
 
             echo $this->args['before_widget'];
             echo $this->args['before_title'];
-            echo esc_html( $this->instance['title'] );
+            echo esc_html($this->instance['title']);
             echo $this->args['after_title'];
-            // $this->render_contents_list_today();
+            $this->render_contents_list_today();
             echo $this->instance['text'];
             echo $this->args['after_widget'];
 
+            wp_enqueue_style('hbd-daily-contents', get_settings('site_url').'/wp-content/plugins/hbd-daily-contents/style.css');
+            wp_enqueue_script('hbd-daily-contents', get_settings('site_url').'/wp-content/plugins/hbd-daily-contents/script.js');
     }
 
     public function get_contents_list_today()
@@ -210,17 +212,23 @@ class  Hbd_Daily_Widget extends WP_Widget
     }
 
     public function render_contents_list_today(){
-        $query =  get_contents_list_today();
+        echo '<div class="hbd-daily-contents">';
+        $query =  $this->get_contents_list_today();
         if ($query->have_posts()) {
             while ($query->have_posts()) {
                 $query->the_post();
-                /**
                 ?>
-                <li><a href="<?php the_permalink(); ?>" title="<?php the_title_attribute(); ?>"><?php the_title(); ?></a></li>
+                <div>
+                    <?php the_post_thumbnail('large'); ?>
+                    <?php the_content(); ?>
+                    <p><a href="<?php the_permalink(); ?>" title="<?php the_title_attribute(); ?>"><?php the_title(); ?></a></p>
+                </div>
+
                 <?php
-                 */
             }
         }
         wp_reset_postdata();
+        echo '</div>';
     }
+
 }//Hbd_Daily_Widget
